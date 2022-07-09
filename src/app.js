@@ -1,14 +1,17 @@
-const express = require("express")
-const app = express()
-const PORT = 3700
-const cookieParser = require("cookie-parser");
-const sessions = require('express-session');
+"use strict";
 
+const express = require("express");
+const app = express();
+const path = require("path");
+const morgan = require("morgan");
+const cookieRoutes = require('./routes/cookies.routes')
+const PORT = 4500;
 
-app.get("/usuario", (req,res) => {
-    res.sendFile(__dirname, "usuario.html")
-})
+app.use(express.json());
+app.use(morgan("dev"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.resolve("src", "public")))
 
-app.listen(PORT, () => console.log("estoy vivo en el puerto", PORT))
+app.use('/',cookieRoutes)
 
-
+app.listen(PORT, () => console.log("servidor iniciado en ", PORT));
