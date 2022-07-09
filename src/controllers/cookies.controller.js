@@ -4,4 +4,11 @@ const home = (req, res) => {
     return res.status(200).sendFile(path.resolve("src", "public", "home.html"))
 }
 
-module.exports ={home}
+const usuario = (req, res) => {
+    return res.status(200).sendFile(path.resolve("src", "public", "usuario.html"))
+}
+
+
+
+
+module.exports ={home, usuario}
